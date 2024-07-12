@@ -1,0 +1,15 @@
+<p>hotelrooms works!</p>
+<p>My hotel name is {{hotelname}}</p>
+<div [innerHTML]="mytxt"></div>
+<button (click)="toggle()">
+    Click to toggle display
+</button>
+<div [hidden]="displayButton"> Click Button to Display</div>
+<div>Number of Rooms Available are {{rooms.availableRooms}}</div>
+<div>
+    Booked rooms 
+    {{rooms.bookedRooms ?? "No Booked rooms available!!!"}}
+</div>
+<div *ngIf="rooms.totalRooms > 0">Total Number of Rooms {{rooms.totalRooms}}
+Rooms List {{roomsList} }
+</div>
