@@ -24,6 +24,7 @@ export class HotelroomsComponent {
     photo: "https://instructor-academy.onlinecoursehost.com/content/images/2023/05/How-to-Create-an-Online-Course-For-Free--Complete-Guide--6.jpg",
     checkinTime: new Date("11-Nov-2024"),
     checkoutTime: new Date("13-Nov-2024"),
+    rating: 4.5,
   },
   {
     roomType: "AC Room",
@@ -32,6 +33,7 @@ export class HotelroomsComponent {
     photo: "https://instructor-academy.onlinecoursehost.com/content/images/2023/05/How-to-Create-an-Online-Course-For-Free--Complete-Guide--6.jpg",
     checkinTime: new Date("11-Nov-2024"),
     checkoutTime: new Date("13-Nov-2024"),
+    rating: 4,
   },
   {
     roomType: "Common Room",
@@ -39,13 +41,18 @@ export class HotelroomsComponent {
     price: 200,
     photo: "https://instructor-academy.onlinecoursehost.com/content/images/2023/05/How-to-Create-an-Online-Course-For-Free--Complete-Guide--6.jpg",
     checkinTime: new Date("11-Nov-2024"),
-    checkoutTime: new Date("13-Nov-2024"),
+    checkoutTime: new Date("20-Nov-2024"),
+    rating: 3.52,
   }
 
 ]
 
   toggle(){
     this.displayButton = ! this.displayButton;
+  }
+
+  selectRoom(room: roomlist) {
+    console.log("Selected room in parent component:", room);
   }
 
 }

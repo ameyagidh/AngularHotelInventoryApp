@@ -1,7 +1,7 @@
 export interface hotelroomsInterface{
     totalRooms: number;
-    availableRooms?: number;
-    bookedRooms?: number;
+    availableRooms: number;
+    bookedRooms: number;
 }
 
 export interface roomlist{
@@ -11,7 +11,7 @@ export interface roomlist{
     photo: string,
     checkinTime: Date,
     checkoutTime: Date,
-
+    rating:  number,
 }
 
 

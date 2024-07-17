@@ -1,2 +1,12 @@
 <h1>Ameya Santosh Gidh</h1>
-<hiv-hotelrooms></hiv-hotelrooms>
+
+<div [ngSwitch] = "role">
+    <div *ngSwitchCase="'User'">Welcome User!</div>
+    <div *ngSwitchCase="'Admin'">
+        <hiv-hotelrooms></hiv-hotelrooms>
+    </div>
+    <div *ngSwitchDefault>
+        Not authorized to view this page.
+    </div>
+</div>
+
