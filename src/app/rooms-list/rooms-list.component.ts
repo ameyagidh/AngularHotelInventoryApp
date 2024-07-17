@@ -4,7 +4,7 @@ import { roomlist } from '../hotelrooms/hotelroomsInterface';
 @Component({
   selector: 'hiv-rooms-list',
   templateUrl: './rooms-list.component.html',
-  styleUrl: './rooms-list.component.scss'
+  styleUrls: ['./rooms-list.component.scss']  // Corrected here
 })
 export class RoomsListComponent {
 
@@ -12,7 +12,7 @@ export class RoomsListComponent {
   @Output() selectedRoom = new EventEmitter<roomlist>();
 
   selectRoom(room: roomlist) {
-    console.log("Selected room in child component:");
+    console.log("Selected room in child component:", room);
     this.selectedRoom.emit(room);
   }
 }

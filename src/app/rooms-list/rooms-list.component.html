@@ -3,26 +3,30 @@
 <div> List of Rooms</div>
 
 <table>
+  <thead>
     <tr>
-        <th>Index</th>
-        <th>Even or Odd</th>
-        <th>Room Type</th>
-        <th>Amentites</th>
-        <th>Price</th>
-        <th>checkin Time</th>
-        <th>checkout Time</th>
-        <th>Rating</th>
-        <th>Select Room</th>
+      <th>Index</th>
+      <th>Even or Odd</th>
+      <th>Room Type</th>
+      <th>Amentites</th>
+      <th>Price</th>
+      <th>Check-in Time</th>
+      <th>Check-out Time</th>
+      <th>Rating</th>
+      <th>Select Room</th>
     </tr>
-    <tr *ngFor="let room of roomsList | slice : 0:10 ; let e = even; let o = odd; let i = index" [ngClass]="{'even': e, 'odd': o}">
-        <td>{{i | percent}}</td>
-        <td>{{e? "Even" : "Odd"}}</td>
-        <td>{{room.roomType | uppercase}}</td>
-        <td>{{room.amentites | lowercase}}</td>
-        <td>{{ room.price | currency:'USD' }}</td>
-        <td>{{room.checkinTime  | date: 'shortDate'}}</td>
-        <td>{{room.checkoutTime  | date: 'shortDate'}}</td>
-        <td>{{room.rating | number:'1.1-2' : 'en-us'}}</td>
-        <td><button class="btn btn-primary" (click)="selectRoom(room)">Select</button></td>
+  </thead>
+  <tbody>
+    <tr *ngFor="let room of roomsList | slice: 0: 10; let e = even; let o = odd; let i = index" [ngClass]="{'even': e, 'odd': o}">
+      <td>{{i}}</td>
+      <td>{{e ? 'Even' : 'Odd'}}</td>
+      <td>{{room.roomType | uppercase}}</td>
+      <td>{{room.amentites | lowercase}}</td>
+      <td>{{room.price | currency: 'USD'}}</td>
+      <td>{{room.checkinTime | date: 'shortDate'}}</td>
+      <td>{{room.checkoutTime | date: 'shortDate'}}</td>
+      <td>{{room.rating | number: '1.1-2': 'en-us'}}</td>
+      <td><button class="btn btn-primary" (click)="selectRoom(room)">Select</button></td>
     </tr>
+  </tbody>
 </table>
