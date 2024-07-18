@@ -13,15 +13,21 @@
 <div *ngIf="rooms?.availableRooms == 2">
     Test Element 
 </div>
-<div *ngIf="rooms.totalRooms > 0">Total Number of Rooms {{rooms.totalRooms}}
-    Rooms List {{roomsList}}
-</div>
+
+<div *ngIf="selectedRoom_">
+    Selected Room is {{selectedRoom_ |json}}
+ </div> 
     
 <div>
     List of Rooms
 </div>
 <hiv-rooms-list [roomsList]="roomsList"
     (selectedRoom)="selectRoom($event)">
+
+<div *ngIf="selectedRoom_">
+    Selected Room is {{selectedRoom_ | json}}
+</div>
+  
 </hiv-rooms-list>
    <div  [ngStyle]="{'color': rooms.availableRooms > 5 ? 'green' : 'red'}">
     My Table Data

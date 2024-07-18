@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { hotelroomsInterface, roomlist } from './hotelroomsInterface';
+import { RoomsListComponent } from '../rooms-list/rooms-list.component';
 
 @Component({
   selector: 'hiv-hotelrooms',
@@ -10,6 +11,7 @@ export class HotelroomsComponent {
   hotelname = "Courtyard";
   displayButton = false;
   mytxt = "Ameya Santosh Gidh is a Full Stack Developer";
+  selectedRoom_ !: roomlist;
 
   rooms: hotelroomsInterface = {
     totalRooms: 7,
@@ -53,5 +55,8 @@ export class HotelroomsComponent {
 
   selectRoom(room: roomlist) {
     console.log("Selected room in parent component:", room);
+    this.selectedRoom_ = room;
   }
+
+  
 }
