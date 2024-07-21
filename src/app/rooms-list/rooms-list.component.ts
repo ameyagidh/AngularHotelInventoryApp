@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { HotelroomsComponent } from '../hotelrooms/hotelrooms.component';
 import { roomlist } from '../hotelrooms/hotelroomsInterface';
 
 @Component({
