@@ -1,6 +1,6 @@
 <p>rooms-list works!</p>
 
-<div> List of Rooms</div>
+<div> List of Rooms {{title_}}</div>
 
 <table>
   <thead>
@@ -20,8 +20,8 @@
     <tr *ngFor="let room of roomsList | slice: 0: 10; let e = even; let o = odd; let i = index" [ngClass]="{'even': e, 'odd': o}">
       <td>{{i}}</td>
       <td>{{e ? 'Even' : 'Odd'}}</td>
-      <td>{{room.roomType | uppercase}}</td>
-      <td>{{room.amentites | lowercase}}</td>
+      <td>{{room.roomType | lowercase}}</td>
+      <td>{{room.amentites | uppercase}}</td>
       <td>{{room.price | currency: 'USD'}}</td>
       <td>{{room.checkinTime | date: 'shortDate'}}</td>
       <td>{{room.checkoutTime | date: 'shortDate'}}</td>

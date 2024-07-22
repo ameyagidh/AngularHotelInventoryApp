@@ -6,3 +6,14 @@
     background-color: tomato;
     color: white;
 }
+
+table {
+    margin: 10px;
+    padding: 10px;
+    align-items: center;
+    border-spacing: 15px; /* Adds spacing between columns */
+}
+
+th, td {
+    padding: 10px ; /* Adds padding inside the cells */
+}

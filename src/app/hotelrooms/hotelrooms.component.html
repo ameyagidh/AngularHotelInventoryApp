@@ -14,6 +14,10 @@
     Test Element 
 </div>
 
+<div>
+    <button (click) = "AddRoom()"> Add Room</button>
+</div>
+
 <!-- From child Component -->
 <div *ngIf="selectedRoom_">
     Selected Room is {{selectedRoom_ |json}}
@@ -24,13 +28,14 @@
 </div>
 
  <!-- From Parent Component  -->
-<hiv-rooms-list [roomsList]="roomsList"
+<hiv-rooms-list [roomsList]="roomsList" [title_]=title_
     (selectedRoom)="selectRoom($event)">
 
 <div *ngIf="selectedRoom_">
     Selected Room is {{selectedRoom_ | json}}
 </div>
   
+
 </hiv-rooms-list>
    <div  [ngStyle]="{'color': rooms.availableRooms > 5 ? 'green' : 'red'}">
     My Table Data

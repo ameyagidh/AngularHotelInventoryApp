@@ -12,7 +12,7 @@ export class HotelroomsComponent {
   displayButton = false;
   mytxt = "Ameya Santosh Gidh is a Full Stack Developer";
   selectedRoom_ !: roomlist;
-
+  title_ = "Ameya's Hotel"
   rooms: hotelroomsInterface = {
     totalRooms: 7,
     availableRooms: 2,
@@ -51,6 +51,8 @@ export class HotelroomsComponent {
 
   toggle() {
     this.displayButton = !this.displayButton;
+    if(this.title_ == "Rooms List"){this.title_ = "Ameya's Hotel"}
+    else{this.title_ = "Rooms List"}
   }
 
   selectRoom(room: roomlist) {
@@ -58,5 +60,19 @@ export class HotelroomsComponent {
     this.selectedRoom_ = room;
   }
 
+  AddRoom(){
+    const room : roomlist = {
+      roomType: "Newly Furnished Room",
+      amentites: "AC2",
+      price: 2000,
+      photo: "https://instructor-academy.onlinecoursehost.com/content/images/2023/05/How-to-Create-an-Online-Course-For-Free--Complete-Guide--6.jpg",
+      checkinTime: new Date("01-Nov-2024"),
+      checkoutTime: new Date("22-Nov-2024"),
+      rating: 4.52,
+
+    }
+    // this.roomsList.push(room);
+    this.roomsList = [...this.roomsList, room];
+  }
   
 }
