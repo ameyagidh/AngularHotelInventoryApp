@@ -7,12 +7,14 @@ import { HotelroomsComponent } from './hotelrooms/hotelrooms.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RoomsListComponent } from './rooms-list/rooms-list.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HotelroomsComponent,
     RoomsListComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

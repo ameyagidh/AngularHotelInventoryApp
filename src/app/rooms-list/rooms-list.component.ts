@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, DoCheck, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { HotelroomsComponent } from '../hotelrooms/hotelrooms.component';
 import { roomlist } from '../hotelrooms/hotelroomsInterface';
 
@@ -7,9 +7,13 @@ import { roomlist } from '../hotelrooms/hotelroomsInterface';
   templateUrl: './rooms-list.component.html',
   styleUrls: ['./rooms-list.component.scss']  // Corrected here
 })
-export class RoomsListComponent implements OnChanges {
-  ngOnChanges(changes: SimpleChanges): void {
+export class RoomsListComponent implements OnChanges, DoCheck {
+  ngDoCheck(): void {
+   console.log("Do Check is called")
+  }
+  ngOnChanges(changes: SimpleChanges): void { 
    console.log(changes);
+   console.log("On Change is called")
    if(changes["title_"]){
       this.title_ = changes["title_"].currentValue.toUpperCase();
    }

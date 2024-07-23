@@ -1,4 +1,7 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+
+import { HotelroomsComponent } from './hotelrooms/hotelrooms.component';
+import { HeaderComponent } from './header/header.component';
 
 @Component({
   selector: 'hiv',
@@ -6,8 +9,12 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   styleUrl: './app.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
+  ngOnInit(): void {
+    
+  }
+ 
   title = 'hotelInventoryApp';
   role = "Admin";
- 
+  
 }

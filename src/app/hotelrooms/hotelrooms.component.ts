@@ -1,13 +1,28 @@
-import { Component } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { hotelroomsInterface, roomlist } from './hotelroomsInterface';
 import { RoomsListComponent } from '../rooms-list/rooms-list.component';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'hiv-hotelrooms',
   templateUrl: './hotelrooms.component.html',
   styleUrls: ['./hotelrooms.component.scss']  // Corrected here
 })
-export class HotelroomsComponent {
+export class HotelroomsComponent implements AfterViewInit, AfterViewChecked{
+
+  @ViewChild(HeaderComponent, {static: true}) headerComponent!: HeaderComponent;
+  @ViewChild('user',{read: ViewContainerRef}) vcr!: ViewContainerRef;
+
+  ngAfterViewInit(): void {
+    console.log(this.headerComponent);
+    const componentRef = this.vcr.createComponent(HeaderComponent);
+    componentRef.instance.title = 'New Title';
+  }
+
+  ngAfterViewChecked(): void {
+    // this.headerComponent.title = "Tp"
+  }
+  
   hotelname = "Courtyard";
   displayButton = false;
   mytxt = "Ameya Santosh Gidh is a Full Stack Developer";
