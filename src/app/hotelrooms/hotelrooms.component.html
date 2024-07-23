@@ -36,11 +36,16 @@
 <div *ngIf="selectedRoom_">
     Selected Room is {{selectedRoom_ | json}}
 </div>
-  
+  </hiv-rooms-list>
 
-</hiv-rooms-list>
-   <div  [ngStyle]="{'color': rooms.availableRooms > 5 ? 'green' : 'red'}">
+<div  [ngStyle]="{'color': rooms.availableRooms > 5 ? 'green' : 'red'}">
     My Table Data
     <!-- {{roomsList}}
     {{roomsList | json}} -->
-   </div>
+</div>
+
+<div #name></div>
+
+<hiv-container>
+    <h1>This is a container</h1>
+</hiv-container>

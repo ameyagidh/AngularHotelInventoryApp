@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
 import { hotelroomsInterface, roomlist } from './hotelroomsInterface';
 import { RoomsListComponent } from '../rooms-list/rooms-list.component';
 import { HeaderComponent } from '../header/header.component';
@@ -8,16 +8,28 @@ import { HeaderComponent } from '../header/header.component';
   templateUrl: './hotelrooms.component.html',
   styleUrls: ['./hotelrooms.component.scss']  // Corrected here
 })
-export class HotelroomsComponent implements AfterViewInit, AfterViewChecked{
+export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnInit{
 
   @ViewChild(HeaderComponent, {static: true}) headerComponent!: HeaderComponent;
   @ViewChild('user',{read: ViewContainerRef}) vcr!: ViewContainerRef;
+  @ViewChild('name',{static:true}) name!: ElementRef
+  @ViewChildren(HeaderComponent)headerChildrenComponent!: QueryList<HeaderComponent>;
+
+  ngOnInit(): void {
+    this.name.nativeElement.innerText = "Ameya Santosh Gidh"
+  }
 
   ngAfterViewInit(): void {
     console.log(this.headerComponent);
+    // console.log(this.headerComponent.title);
     const componentRef = this.vcr.createComponent(HeaderComponent);
-    componentRef.instance.title = 'New Title';
-  }
+    componentRef.instance.title = 'Ameya Coffee Shops';
+    this.name.nativeElement.innerText = "Changed Inner Text"
+    if (this.headerComponent) {
+      this.headerChildrenComponent.last.title = 'CCD'; 
+      console.log( this.headerChildrenComponent.last.title )
+    }
+    }
 
   ngAfterViewChecked(): void {
     // this.headerComponent.title = "Tp"
