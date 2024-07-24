@@ -4,7 +4,7 @@ import { RoomsListComponent } from '../rooms-list/rooms-list.component';
 import { HeaderComponent } from '../header/header.component';
 import { HotelroomsService } from '../services/hotelrooms.service';
 import { LoggerService } from '../services/logger.service';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 
 @Component({
@@ -16,12 +16,18 @@ export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnI
 
   ngOnDestroy(): void {
   //  console.log("Destroy Called"); 
+    // if(this.subscription){
+    //   this.subscription.unsubscribe();
+    // }
   }
 
   @ViewChild(HeaderComponent, {static: true}) headerComponent!: HeaderComponent;
   @ViewChild('user',{read: ViewContainerRef}) vcr!: ViewContainerRef;
   @ViewChild('name',{static:true}) name!: ElementRef
   @ViewChildren(HeaderComponent)headerChildrenComponent!: QueryList<HeaderComponent>;
+
+  // subscription !: Subscription;
+
 
   ngAfterViewInit(): void {
     console.log(this.headerComponent);
@@ -64,6 +70,8 @@ export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnI
   constructor( private hotelroomsService: HotelroomsService, private loggerService: LoggerService){
   }
 
+  room$!: Observable<roomlist[]>;
+
   ngOnInit(): void {
 
     this.LoadDataStream();
@@ -73,14 +81,14 @@ export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnI
     // this.roomsList =  this.hotelroomsService.getRooms()
 
     // Display data fetched from API Service into the website
-    // this.hotelroomsService.getRooms().subscribe(rooms=>{this.roomsList = rooms;})
-    this.hotelroomsService.getRooms$.subscribe((rooms: roomlist[])=>{this.roomsList = rooms;})
+    this.hotelroomsService.getRooms().subscribe(rooms=>{this.roomsList = rooms;})
+    // this.subscription =  this.hotelroomsService.getRooms$.subscribe((rooms: roomlist[])=>{this.roomsList = rooms;})
   
     console.log(this.hotelroomsService.getRooms());
     this.loggerService?.Log("Log Injected");
     // Rxjs getting data from RX JS 
     this.stream.subscribe((data)=>{console.log(data)})
-  
+    this.room$ = this.hotelroomsService.getRooms$;
   }
 
   toggle() {
@@ -123,7 +131,7 @@ export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnI
       roomNumber:"3",
       roomType: "Newly Furnished Room",
       amentites: "ALl AC",
-      price: 2000,
+      price: 34050,
       photo: "https://instructor-academy.onlinecoursehost.com/content/images/2023/05/How-to-Create-an-Online-Course-For-Free--Complete-Guide--6.jpg",
       checkinTime: new Date("01-Nov-2024"),
       checkoutTime: new Date("22-Nov-2024"),

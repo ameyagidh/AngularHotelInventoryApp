@@ -29,6 +29,8 @@
     List of Rooms
 </div>
 
+<!-- {{room$ | async | json}} -->
+
  <!-- From Parent Component  -->
 <hiv-rooms-list [roomsList]="roomsList" [title_]=title_
     (selectedRoom)="selectRoom($event)">
@@ -60,9 +62,10 @@
         <li>Peach</li>
         <li>Mango</li>
     </ul>
-    <hiv-rooms-list [roomsList]="roomsList" [title_]=title_
-    (selectedRoom)="selectRoom($event)">
+    <!-- oom$ | async -->
+    <hiv-rooms-list [roomsList]="roomsList" [title_]="title_" (selectedRoom)="selectRoom($event)">
     </hiv-rooms-list>
+    
 </div>
 
 <button (click)="editRoom()">

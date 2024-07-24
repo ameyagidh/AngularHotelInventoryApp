@@ -4,7 +4,7 @@ import { environment } from '../../environments/environment';
 import {API_SERVICE_CONFIG} from "../../app/AppConfig/appconfig.service"
 import { AppConfig } from '../AppConfig/appconfig.interface';
 import { HttpClient, HttpRequest } from '@angular/common/http';
-import { shareReplay } from 'rxjs';
+import { shareReplay, Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -45,12 +45,14 @@ export class HotelroomsService implements OnInit {
   //   } 
   // ];
   getRooms$: any;
-  
+  subscription !: Subscription;
+
   constructor(@Inject(API_SERVICE_CONFIG) private config: AppConfig, private Http:HttpClient) {
     // console.log(environment.apiEndpoint);
     console.log(config.apiEndpoint)
     console.log("Environment Configured");
     // console.log(Http);
+    
     this.getRooms$ = this.Http.get<roomlist[]>("/api/rooms").pipe(
       shareReplay(1)
     );
