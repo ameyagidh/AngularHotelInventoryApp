@@ -70,6 +70,7 @@ export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnI
   constructor( private hotelroomsService: HotelroomsService, private loggerService: LoggerService){
   }
 
+  // Async Pipe Data Loading
   room$!: Observable<roomlist[]>;
 
   ngOnInit(): void {
@@ -88,6 +89,8 @@ export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnI
     this.loggerService?.Log("Log Injected");
     // Rxjs getting data from RX JS 
     this.stream.subscribe((data)=>{console.log(data)})
+    
+    // ASync Pipe
     this.room$ = this.hotelroomsService.getRooms$;
   }
 

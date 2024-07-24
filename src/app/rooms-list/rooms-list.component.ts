@@ -20,7 +20,7 @@ export class RoomsListComponent implements OnChanges, DoCheck {
   }
 
   // @Input() roomsList: roomlist[] | null = [] ; 
-  @Input() roomsList: roomlist[]= [] ; 
+  @Input() roomsList: roomlist[] | null= [] ; 
   @Input() title_: string = "";
   @Output() selectedRoom = new EventEmitter<roomlist>();
 

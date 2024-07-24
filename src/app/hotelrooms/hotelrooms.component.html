@@ -84,4 +84,8 @@
 <div>
    Total Bytes Loaded {{total_bytes}}
 </div>
-
+<div>
+    Async Pipe Data Load.
+</div>
+<hiv-rooms-list [roomsList]="room$ | async" [title_]="title_" (selectedRoom)="selectRoom($event)">
+</hiv-rooms-list>
