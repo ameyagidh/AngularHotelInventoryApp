@@ -55,7 +55,9 @@ export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnI
 
   ngOnInit(): void {
     this.name.nativeElement.innerText = "Ameya Santosh Gidh"
-    this.roomsList =  this.hotelroomsService.getRooms()
+    // this.roomsList =  this.hotelroomsService.getRooms()
+    this.roomsList =  []
+    console.log(this.hotelroomsService.getRooms());
     this.loggerService?.Log("Log Injected");
   }
 
@@ -73,6 +75,7 @@ export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnI
 
   AddRoom(){
     const room : roomlist = {
+      roomNumber:"3",
       roomType: "Newly Furnished Room",
       amentites: "AC2",
       price: 2000,
@@ -84,7 +87,7 @@ export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnI
     }
     // this.roomsList.push(room);
     this.roomsList = [...this.roomsList, room];
-  }
+  } 
   
 
 }

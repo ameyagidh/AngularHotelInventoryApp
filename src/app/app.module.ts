@@ -11,6 +11,7 @@ import { HeaderComponent } from './header/header.component';
 import { ContainerComponent } from './container/container.component';
 import { EmployeeComponent } from './employee/employee.component';
 import { API_CONFIG, API_SERVICE_CONFIG } from './AppConfig/appconfig.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -20,12 +21,14 @@ import { API_CONFIG, API_SERVICE_CONFIG } from './AppConfig/appconfig.service';
     HeaderComponent,
     ContainerComponent,
     EmployeeComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    NgbModule
+    NgbModule,
+    HttpClientModule,
   ],
   providers: [
     provideClientHydration(),

@@ -16,7 +16,7 @@ export class AppComponent implements OnInit{
 
   constructor(@Inject(LocalStorageToken) private localStorage:Storage){
   }
-
+ 
   ngOnInit(): void {
     this.localStorage.setItem('name', "Ameya Santosh Gidh Cafe");
   }
