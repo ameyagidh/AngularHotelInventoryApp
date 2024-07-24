@@ -4,7 +4,7 @@ import { RoomsListComponent } from '../rooms-list/rooms-list.component';
 import { HeaderComponent } from '../header/header.component';
 import { HotelroomsService } from '../services/hotelrooms.service';
 import { LoggerService } from '../services/logger.service';
-import { Observable, Subscription } from 'rxjs';
+import { catchError, Observable, Subscription } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 
 @Component({
@@ -89,9 +89,15 @@ export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnI
     this.loggerService?.Log("Log Injected");
     // Rxjs getting data from RX JS 
     this.stream.subscribe((data)=>{console.log(data)})
-    
+
     // ASync Pipe
-    this.room$ = this.hotelroomsService.getRooms$;
+    this.room$ = this.hotelroomsService.getRooms$.pipe(
+
+      catchError((err)=>{
+          console.log(err);
+          return ([])
+      })
+    );
   }
 
   toggle() {
