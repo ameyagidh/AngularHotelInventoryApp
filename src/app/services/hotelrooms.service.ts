@@ -51,7 +51,7 @@ export class HotelroomsService {
 
   getRooms(){
     // return this.roomsList;
-    return this.Http.get('/api/rooms');
+    return this.Http.get<roomlist[]>('/api/rooms');
   }
 }
  

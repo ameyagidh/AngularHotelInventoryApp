@@ -56,7 +56,7 @@ export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnI
   ngOnInit(): void {
     this.name.nativeElement.innerText = "Ameya Santosh Gidh"
     // this.roomsList =  this.hotelroomsService.getRooms()
-    this.roomsList =  []
+    this.hotelroomsService.getRooms().subscribe(rooms=>{this.roomsList = rooms;})
     console.log(this.hotelroomsService.getRooms());
     this.loggerService?.Log("Log Injected");
   }
