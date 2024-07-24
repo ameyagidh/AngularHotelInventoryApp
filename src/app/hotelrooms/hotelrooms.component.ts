@@ -64,10 +64,12 @@ export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnI
 
   ngOnInit(): void {
     this.name.nativeElement.innerText = "Ameya Santosh Gidh"
-    this.roomsList =  this.hotelroomsService.getRooms()
+
+    // Uncomment to use Static Data from the service
+    // this.roomsList =  this.hotelroomsService.getRooms()
 
     // Display data fetched from API Service into the website
-    // this.hotelroomsService.getRooms().subscribe(rooms=>{this.roomsList = rooms;})
+    this.hotelroomsService.getRooms().subscribe(rooms=>{this.roomsList = rooms;})
 
     console.log(this.hotelroomsService.getRooms());
     this.loggerService?.Log("Log Injected");
@@ -90,7 +92,7 @@ export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnI
 
   AddRoom(){
     const room : roomlist = {
-      roomNumber:"3",
+      // roomNumber:"3",
       roomType: "Newly Furnished Room",
       amentites: "AC2",
       price: 2000,
@@ -100,8 +102,15 @@ export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnI
       rating: 4.52,
 
     }
+
     // this.roomsList.push(room);
-    this.roomsList = [...this.roomsList, room];
+
+    // Better way
+    // this.roomsList = [...this.roomsList, room];
+    
+    // Post data to api
+    this.hotelroomsService.addRoom(room).subscribe((data)=>{this.roomsList = data})
+
   } 
   
 

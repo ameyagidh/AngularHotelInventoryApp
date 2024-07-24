@@ -4,7 +4,7 @@ export const LocalStorageToken = new InjectionToken<Storage | null>('local stora
   providedIn: 'root',
   factory: () => {
     if (typeof window !== 'undefined' && window.localStorage) {
-      return window.localStorage;
+      return typeof window !== 'undefined' ? window.localStorage : null;
     }
     return null;
   }
