@@ -79,7 +79,7 @@ export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnI
   toggle() {
     this.displayButton = !this.displayButton;
     if(this.title_ == "Rooms List"){this.title_ = "Ameya's Hotel"}
-    else{this.title_ = "Rooms List"}
+    else{this.title_ = "Rooms Lists"}
     this.destroyButton = !this.destroyButton
   }
 
