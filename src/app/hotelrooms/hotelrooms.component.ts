@@ -4,6 +4,7 @@ import { RoomsListComponent } from '../rooms-list/rooms-list.component';
 import { HeaderComponent } from '../header/header.component';
 import { HotelroomsService } from '../services/hotelrooms.service';
 import { LoggerService } from '../services/logger.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'hiv-hotelrooms',
@@ -12,7 +13,7 @@ import { LoggerService } from '../services/logger.service';
 })
 export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnInit, OnDestroy{
   ngOnDestroy(): void {
-   console.log("Destroy Called") 
+   console.log("Destroy Called"); 
   }
 
   @ViewChild(HeaderComponent, {static: true}) headerComponent!: HeaderComponent;
@@ -50,15 +51,29 @@ export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnI
 
   // Dependency Injection 
   roomsList: roomlist[] = []
+   
+  stream = new Observable(observer =>{
+    observer.next(1);
+    observer.next("user1");
+    observer.next("user2");
+    observer.complete();
+  })
+
   constructor( private hotelroomsService: HotelroomsService, private loggerService: LoggerService){
   }
 
   ngOnInit(): void {
     this.name.nativeElement.innerText = "Ameya Santosh Gidh"
-    // this.roomsList =  this.hotelroomsService.getRooms()
-    this.hotelroomsService.getRooms().subscribe(rooms=>{this.roomsList = rooms;})
+    this.roomsList =  this.hotelroomsService.getRooms()
+
+    // Display data fetched from API Service into the website
+    // this.hotelroomsService.getRooms().subscribe(rooms=>{this.roomsList = rooms;})
+
     console.log(this.hotelroomsService.getRooms());
     this.loggerService?.Log("Log Injected");
+    // Rxjs getting data from RX JS 
+    this.stream.subscribe((data)=>{console.log(data)})
+  
   }
 
   toggle() {
