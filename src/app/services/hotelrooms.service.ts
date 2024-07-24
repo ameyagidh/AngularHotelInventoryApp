@@ -1,18 +1,18 @@
-import { Inject, Injectable } from '@angular/core';
+import { Inject, Injectable, OnInit } from '@angular/core';
 import { roomlist } from '../hotelrooms/hotelroomsInterface';
 import { environment } from '../../environments/environment';
 import {API_SERVICE_CONFIG} from "../../app/AppConfig/appconfig.service"
 import { AppConfig } from '../AppConfig/appconfig.interface';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest } from '@angular/common/http';
+import { shareReplay } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
-export class HotelroomsService {
-
+export class HotelroomsService implements OnInit {
 
   roomsList: roomlist[] = [];
-   
+
   // Uncomment for static Data 
 
   // roomsList: roomlist[] = [
@@ -44,13 +44,20 @@ export class HotelroomsService {
   //     rating: 3.52,
   //   } 
   // ];
- 
+  getRooms$: any;
+  
   constructor(@Inject(API_SERVICE_CONFIG) private config: AppConfig, private Http:HttpClient) {
     // console.log(environment.apiEndpoint);
     console.log(config.apiEndpoint)
     console.log("Environment Configured");
     // console.log(Http);
+    this.getRooms$ = this.Http.get<roomlist[]>("/api/rooms").pipe(
+      shareReplay(1)
+    );
+    
    }
+  ngOnInit(): void {
+  }
 
   getRooms(){
     // return this.roomsList;
@@ -69,5 +76,13 @@ export class HotelroomsService {
   deleteRoom(id:string){
     return this.Http.delete<roomlist[]>(`/api/rooms/${id}`)
   }
+  
+  getPhotos(){
+    const request = new HttpRequest('GET', `https://jsonplaceholder.typicode.com/photos`,{
+      reportProgress:true,
+    });
+    return this.Http.request(request);
+  }
+
 }
  

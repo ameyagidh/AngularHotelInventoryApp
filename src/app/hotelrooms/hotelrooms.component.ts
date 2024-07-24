@@ -5,6 +5,7 @@ import { HeaderComponent } from '../header/header.component';
 import { HotelroomsService } from '../services/hotelrooms.service';
 import { LoggerService } from '../services/logger.service';
 import { Observable } from 'rxjs';
+import { HttpEventType } from '@angular/common/http';
 
 @Component({
   selector: 'hiv-hotelrooms',
@@ -14,7 +15,7 @@ import { Observable } from 'rxjs';
 export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnInit, OnDestroy{
 
   ngOnDestroy(): void {
-   console.log("Destroy Called"); 
+  //  console.log("Destroy Called"); 
   }
 
   @ViewChild(HeaderComponent, {static: true}) headerComponent!: HeaderComponent;
@@ -64,14 +65,17 @@ export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnI
   }
 
   ngOnInit(): void {
+
+    this.LoadDataStream();
     this.name.nativeElement.innerText = "Ameya Santosh Gidh"
 
     // Uncomment to use Static Data from the service
     // this.roomsList =  this.hotelroomsService.getRooms()
 
     // Display data fetched from API Service into the website
-    this.hotelroomsService.getRooms().subscribe(rooms=>{this.roomsList = rooms;})
-
+    // this.hotelroomsService.getRooms().subscribe(rooms=>{this.roomsList = rooms;})
+    this.hotelroomsService.getRooms$.subscribe((rooms: roomlist[])=>{this.roomsList = rooms;})
+  
     console.log(this.hotelroomsService.getRooms());
     this.loggerService?.Log("Log Injected");
     // Rxjs getting data from RX JS 
@@ -135,4 +139,34 @@ export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnI
     this.hotelroomsService.deleteRoom("3").subscribe((data)=>{this.roomsList = data})
   }
 
+  total_bytes = 0;
+
+  LoadDataStream(){
+    this.hotelroomsService.getPhotos().subscribe((event)=>{
+      switch(event.type){
+        case HttpEventType.Sent:
+          {
+              console.log("Data Sent");
+              break;
+          }
+          case HttpEventType.ResponseHeader:
+          {
+            console.log("Response Sent");
+              break;
+          }
+          case HttpEventType.DownloadProgress:
+          {
+            this.total_bytes += event.loaded;
+            console.log("Download Progress");
+            console.log(`total Bytes ${this.total_bytes}`);
+            break;
+          }
+          case HttpEventType.Response:
+          {
+            console.log("Response Value");
+            console.log(event.body);
+          }
+      }
+    });
+  }
 }

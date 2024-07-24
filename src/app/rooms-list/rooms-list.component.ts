@@ -9,11 +9,11 @@ import { roomlist } from '../hotelrooms/hotelroomsInterface';
 })
 export class RoomsListComponent implements OnChanges, DoCheck {
   ngDoCheck(): void {
-   console.log("Do Check is called")
+  //  console.log("Do Check is called")
   }
   ngOnChanges(changes: SimpleChanges): void { 
    console.log(changes);
-   console.log("On Change is called")
+  //  console.log("On Change is called")
    if(changes["title_"]){
       this.title_ = changes["title_"].currentValue.toUpperCase();
    }
