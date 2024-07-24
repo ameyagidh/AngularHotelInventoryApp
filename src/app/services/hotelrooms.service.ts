@@ -58,8 +58,16 @@ export class HotelroomsService {
   }
 
   addRoom(room: roomlist){
-    return this.Http.post<roomlist[]>('http://localhost:3000/api/rooms', room);
+    // http://localhost:3000
+    return this.Http.post<roomlist[]>('/api/rooms', room);
   }
 
+  editRoom(room: roomlist){
+    return this.Http.put<roomlist[]>(`http://localhost:3000/api/rooms/${room.roomNumber}`, room)
+  }
+
+  deleteRoom(id:string){
+    return this.Http.delete<roomlist[]>(`/api/rooms/${id}`)
+  }
 }
  

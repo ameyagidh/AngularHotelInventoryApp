@@ -12,6 +12,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./hotelrooms.component.scss']  // Corrected here
 })
 export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnInit, OnDestroy{
+
   ngOnDestroy(): void {
    console.log("Destroy Called"); 
   }
@@ -112,6 +113,26 @@ export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnI
     this.hotelroomsService.addRoom(room).subscribe((data)=>{this.roomsList = data})
 
   } 
-  
+  editRoom() {
+    
+    const room : roomlist = {
+      roomNumber:"3",
+      roomType: "Newly Furnished Room",
+      amentites: "ALl AC",
+      price: 2000,
+      photo: "https://instructor-academy.onlinecoursehost.com/content/images/2023/05/How-to-Create-an-Online-Course-For-Free--Complete-Guide--6.jpg",
+      checkinTime: new Date("01-Nov-2024"),
+      checkoutTime: new Date("22-Nov-2024"),
+      rating: 4.52,
+
+    }
+
+    // Put data to api
+    this.hotelroomsService.editRoom(room).subscribe((data)=>{this.roomsList = data})
+  }
+
+  DeleteRoom(){
+    this.hotelroomsService.deleteRoom("3").subscribe((data)=>{this.roomsList = data})
+  }
 
 }
