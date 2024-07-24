@@ -10,6 +10,7 @@ import { RoomsListComponent } from './rooms-list/rooms-list.component';
 import { HeaderComponent } from './header/header.component';
 import { ContainerComponent } from './container/container.component';
 import { EmployeeComponent } from './employee/employee.component';
+import { API_CONFIG, API_SERVICE_CONFIG } from './AppConfig/appconfig.service';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,11 @@ import { EmployeeComponent } from './employee/employee.component';
     NgbModule
   ],
   providers: [
-    provideClientHydration()
+    provideClientHydration(),
+    {
+      provide: API_SERVICE_CONFIG,
+      useValue: API_CONFIG,
+    },
   ],
   bootstrap: [AppComponent]
 })

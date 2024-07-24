@@ -1,23 +1,24 @@
-import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnInit, QueryList, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, Component, ElementRef, OnDestroy, OnInit, Optional, QueryList, Self, SkipSelf, ViewChild, ViewChildren, ViewContainerRef } from '@angular/core';
 import { hotelroomsInterface, roomlist } from './hotelroomsInterface';
 import { RoomsListComponent } from '../rooms-list/rooms-list.component';
 import { HeaderComponent } from '../header/header.component';
+import { HotelroomsService } from '../services/hotelrooms.service';
+import { LoggerService } from '../services/logger.service';
 
 @Component({
   selector: 'hiv-hotelrooms',
   templateUrl: './hotelrooms.component.html',
   styleUrls: ['./hotelrooms.component.scss']  // Corrected here
 })
-export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnInit{
+export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnInit, OnDestroy{
+  ngOnDestroy(): void {
+   console.log("Destroy Called") 
+  }
 
   @ViewChild(HeaderComponent, {static: true}) headerComponent!: HeaderComponent;
   @ViewChild('user',{read: ViewContainerRef}) vcr!: ViewContainerRef;
   @ViewChild('name',{static:true}) name!: ElementRef
   @ViewChildren(HeaderComponent)headerChildrenComponent!: QueryList<HeaderComponent>;
-
-  ngOnInit(): void {
-    this.name.nativeElement.innerText = "Ameya Santosh Gidh"
-  }
 
   ngAfterViewInit(): void {
     console.log(this.headerComponent);
@@ -37,6 +38,7 @@ export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnI
   
   hotelname = "Courtyard";
   displayButton = false;
+  destroyButton = true;
   mytxt = "Ameya Santosh Gidh is a Full Stack Developer";
   selectedRoom_ !: roomlist;
   title_ = "Ameya's Hotel"
@@ -46,40 +48,22 @@ export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnI
     bookedRooms: 5,
   };
 
-  roomsList: roomlist[] = [
-    {
-      roomType: "Delux Room",
-      amentites: "AC",
-      price: 500,
-      photo: "https://instructor-academy.onlinecoursehost.com/content/images/2023/05/How-to-Create-an-Online-Course-For-Free--Complete-Guide--6.jpg",
-      checkinTime: new Date("11-Nov-2024"),
-      checkoutTime: new Date("13-Nov-2024"),
-      rating: 4.5,
-    },
-    {
-      roomType: "AC Room",
-      amentites: "AC",
-      price: 1500,
-      photo: "https://instructor-academy.onlinecoursehost.com/content/images/2023/05/How-to-Create-an-Online-Course-For-Free--Complete-Guide--6.jpg",
-      checkinTime: new Date("11-Nov-2024"),
-      checkoutTime: new Date("13-Nov-2024"),
-      rating: 4,
-    },
-    {
-      roomType: "Common Room",
-      amentites: "AC",
-      price: 200,
-      photo: "https://instructor-academy.onlinecoursehost.com/content/images/2023/05/How-to-Create-an-Online-Course-For-Free--Complete-Guide--6.jpg",
-      checkinTime: new Date("11-Nov-2024"),
-      checkoutTime: new Date("20-Nov-2024"),
-      rating: 3.52,
-    } 
-  ];
+  // Dependency Injection 
+  roomsList: roomlist[] = []
+  constructor( private hotelroomsService: HotelroomsService, private loggerService: LoggerService){
+  }
+
+  ngOnInit(): void {
+    this.name.nativeElement.innerText = "Ameya Santosh Gidh"
+    this.roomsList =  this.hotelroomsService.getRooms()
+    this.loggerService?.Log("Log Injected");
+  }
 
   toggle() {
     this.displayButton = !this.displayButton;
     if(this.title_ == "Rooms List"){this.title_ = "Ameya's Hotel"}
     else{this.title_ = "Rooms List"}
+    this.destroyButton = !this.destroyButton
   }
 
   selectRoom(room: roomlist) {
@@ -102,4 +86,5 @@ export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnI
     this.roomsList = [...this.roomsList, room];
   }
   
+
 }

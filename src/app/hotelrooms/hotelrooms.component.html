@@ -47,5 +47,20 @@
 <div #name></div>
 
 <hiv-container>
+    <hiv-employee></hiv-employee>
+    <hiv-rooms-list [roomsList]="roomsList" [title_]=title_
+    (selectedRoom)="selectRoom($event)"></hiv-rooms-list>
     <h1>This is a container</h1>
 </hiv-container>
+
+<div *ngIf="destroyButton" >
+    <ul>
+        <li>Apple</li>
+        <li>Orange</li>
+        <li>Peach</li>
+        <li>Mango</li>
+    </ul>
+    <hiv-rooms-list [roomsList]="roomsList" [title_]=title_
+    (selectedRoom)="selectRoom($event)">
+    </hiv-rooms-list>
+</div>
