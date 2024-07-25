@@ -3,7 +3,7 @@ import { roomlist } from '../hotelrooms/hotelroomsInterface';
 import { environment } from '../../environments/environment';
 import {API_SERVICE_CONFIG} from "../../app/AppConfig/appconfig.service"
 import { AppConfig } from '../AppConfig/appconfig.interface';
-import { HttpClient, HttpRequest } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { shareReplay, Subscription } from 'rxjs';
 
 @Injectable({
@@ -45,15 +45,17 @@ export class HotelroomsService implements OnInit {
   //   } 
   // ];
   getRooms$: any;
-  subscription !: Subscription;
-
+  headers_ = new HttpHeaders({'token': "Ameya1234 1"})
+  
   constructor(@Inject(API_SERVICE_CONFIG) private config: AppConfig, private Http:HttpClient) {
     // console.log(environment.apiEndpoint);
     console.log(config.apiEndpoint)
     console.log("Environment Configured");
     // console.log(Http);
     
-    this.getRooms$ = this.Http.get<roomlist[]>("/api/rooms").pipe(
+    this.getRooms$ = this.Http.get<roomlist[]>("/api/rooms",{
+      headers:this.headers_
+    }).pipe(
       shareReplay(1)
     );
     
@@ -63,7 +65,11 @@ export class HotelroomsService implements OnInit {
 
   getRooms(){
     // return this.roomsList;
-    return this.Http.get<roomlist[]>('/api/rooms');
+
+    // In request Header
+    return this.Http.get<roomlist[]>('/api/rooms',{
+
+    });
   }
 
   addRoom(room: roomlist){
@@ -82,6 +88,7 @@ export class HotelroomsService implements OnInit {
   getPhotos(){
     const request = new HttpRequest('GET', `https://jsonplaceholder.typicode.com/photos`,{
       reportProgress:true,
+      headers: this.headers_,
     });
     return this.Http.request(request);
   }

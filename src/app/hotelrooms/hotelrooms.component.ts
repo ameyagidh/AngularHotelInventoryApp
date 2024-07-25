@@ -4,7 +4,7 @@ import { RoomsListComponent } from '../rooms-list/rooms-list.component';
 import { HeaderComponent } from '../header/header.component';
 import { HotelroomsService } from '../services/hotelrooms.service';
 import { LoggerService } from '../services/logger.service';
-import { catchError, Observable, Subscription } from 'rxjs';
+import { catchError, map, Observable, Subject, Subscription } from 'rxjs';
 import { HttpEventType } from '@angular/common/http';
 
 @Component({
@@ -27,7 +27,10 @@ export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnI
   @ViewChildren(HeaderComponent)headerChildrenComponent!: QueryList<HeaderComponent>;
 
   // subscription !: Subscription;
+  error$ = new Subject<string>();
+  roomCount$!: Observable<number>; 
 
+  getError$ = this.error$.asObservable();
 
   ngAfterViewInit(): void {
     console.log(this.headerComponent);
@@ -72,7 +75,7 @@ export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnI
 
   // Async Pipe Data Loading
   room$!: Observable<roomlist[]>;
-
+  
   ngOnInit(): void {
 
     this.LoadDataStream();
@@ -91,13 +94,20 @@ export class HotelroomsComponent implements AfterViewInit, AfterViewChecked, OnI
     this.stream.subscribe((data)=>{console.log(data)})
 
     // ASync Pipe
+  
     this.room$ = this.hotelroomsService.getRooms$.pipe(
 
       catchError((err)=>{
           console.log(err);
-          return ([])
-      })
+          this.error$.next(err.message);
+          return ([]);
+      }) 
     );
+
+    this.roomCount$ = this.hotelroomsService.getRooms$.pipe(
+      map((rooms: roomlist[]) => rooms.length)
+    );
+
   }
 
   toggle() {

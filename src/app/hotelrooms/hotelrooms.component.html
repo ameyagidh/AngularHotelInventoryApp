@@ -89,3 +89,6 @@
 </div>
 <hiv-rooms-list [roomsList]="room$ | async" [title_]="title_" (selectedRoom)="selectRoom($event)">
 </hiv-rooms-list>
+
+<h1>{{getError$ | async }}</h1>
+<h1>{{roomCount$ | async }}</h1>
