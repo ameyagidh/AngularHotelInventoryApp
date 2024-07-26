@@ -19,7 +19,7 @@ export class RoomsBookingComponent implements OnInit {
   ngOnInit(): void {
 
     this.id_$ = this.router.params.pipe(
-      map(params => +params['roomid']) 
+      map(params => params['roomid']) 
     );
     console.log("This is observable pipe data");
     console.log(this.id_$);

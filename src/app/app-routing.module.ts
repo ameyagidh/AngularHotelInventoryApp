@@ -6,6 +6,7 @@ import { ContainerComponent } from './container/container.component';
 import { RoomsListComponent } from './rooms-list/rooms-list.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { RoomsBookingComponent } from './hotelrooms/rooms-booking/rooms-booking.component';
+import { RoomsAddComponent } from './hotelrooms/rooms-add/rooms-add.component';
 
 const routes: Routes = [
   {path: "employee", component: EmployeeComponent},
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path:"roomsList", component: RoomsListComponent },
   {path: "rooms/:id", component: RoomsBookingComponent},
   {path:"", redirectTo:'/rooms' ,pathMatch:"full"},
-  {path:"**", component: NotfoundComponent}
+  {path:"addRoom", component: RoomsAddComponent},
+  {path:"**", component: NotfoundComponent},
 ];
 
 @NgModule({
