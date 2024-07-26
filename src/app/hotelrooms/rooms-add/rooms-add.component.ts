@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { roomlist } from '../hotelroomsInterface';
+import { FormsModule } from '@angular/forms';
+import { RoomsService } from '../../../../hotelapi/dist/rooms/rooms.service';
+import { HotelroomsService } from '../../services/hotelrooms.service';
 
 @Component({
   selector: 'hiv-rooms-add',
@@ -19,8 +22,16 @@ export class RoomsAddComponent implements OnInit{
     rating: 0,
 
   }    
+  successMsg = "Delivered Successfully";
+
+  constructor(private roomService:HotelroomsService){
+  }
 
   ngOnInit(): void {
+    this.roomService.addRoom(this.room).subscribe((data)=>{
+     console.log(data);
+     this.successMsg = "Room Added Successfully";
+    });
   }
 
 }
