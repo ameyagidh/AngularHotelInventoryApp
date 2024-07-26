@@ -28,10 +28,12 @@ export class RoomsAddComponent implements OnInit{
   }
 
   ngOnInit(): void {
+  }
+  AddRoom(){
     this.roomService.addRoom(this.room).subscribe((data)=>{
-     console.log(data);
-     this.successMsg = "Room Added Successfully";
-    });
+      console.log(data);
+      this.successMsg = "Room Added Successfully";
+     });
   }
 
 }
