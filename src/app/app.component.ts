@@ -21,8 +21,11 @@ export class AppComponent implements OnInit{
   }
  
   ngOnInit(): void {
-    this.localStorage.setItem('name', "Ameya Santosh Gidh Cafe");
-    console.log("Local Storage and Service");
+    if (this.localStorage) {
+      this.localStorage.setItem('name', "Ameya Santosh Gidh Cafe");
+      console.log("Local Storage and Service");
+      console.log(this.localStorage)
+    } 
   }
 
 }

@@ -14,6 +14,7 @@
       <th>Check-out Time</th>
       <th>Rating</th>
       <th>Select Room</th>
+      <th>Book Room</th>
     </tr>
   </thead>
   <tbody>
@@ -27,6 +28,7 @@
       <td>{{room.checkoutTime | date: 'shortDate'}}</td>
       <td>{{room.rating | number: '1.1-2': 'en-us'}}</td>
       <td><button class="btn btn-primary" (click)="selectRoom(room)">Select</button></td>
+      <td><button class="btn btn-primary" [routerLink] = "['/rooms',room.roomNumber]">Book Room Now</button></td>
     </tr>
   </tbody>
 </table>
