@@ -25,6 +25,8 @@ import { NotfoundComponent } from './notfound/notfound.component';
 import { RoomsBookingComponent } from './hotelrooms/rooms-booking/rooms-booking.component';
 import { RoomsAddComponent } from './hotelrooms/rooms-add/rooms-add.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
+import { HoverDirective } from './hover.directive';
 
 function initFactory(initService: InitService){
   return ()=>{
@@ -44,6 +46,8 @@ function initFactory(initService: InitService){
     NotfoundComponent,
     RoomsBookingComponent,
     RoomsAddComponent,
+    LoginComponent,
+    HoverDirective,
 
   ],
   imports: [

@@ -7,6 +7,7 @@ import { RoomsListComponent } from './rooms-list/rooms-list.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { RoomsBookingComponent } from './hotelrooms/rooms-booking/rooms-booking.component';
 import { RoomsAddComponent } from './hotelrooms/rooms-add/rooms-add.component';
+import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {path: "employee", component: EmployeeComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: "rooms/:id", component: RoomsBookingComponent},
   {path:"", redirectTo:'/rooms' ,pathMatch:"full"},
   {path:"addRoom", component: RoomsAddComponent},
+  {path:"login", component: LoginComponent},
   {path:"**", component: NotfoundComponent},
 ];
 
